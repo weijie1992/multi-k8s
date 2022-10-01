@@ -14,7 +14,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - '3050:80'
+      - '3051:80'
     depends_on:
     - api
     - client
