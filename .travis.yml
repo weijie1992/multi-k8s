@@ -1,10 +1,28 @@
 sudo: required
 services:
   - docker
-before_install
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1 #automatically resolve prompt for google cli such as when google cli asking us to confirm something
+before_install:
   - openssl aes-256-cbc -K $encrypted_9ed3b022f8a8_key -iv $encrypted_9ed3b022f8a8_iv -in multi-k8s-2-365013-4cd8336f48ac.json.enc -out multi-k8s-2-365013-4cd8336f48ac.json -d
   - curl https://sdk.cloud.google.com | bash > /dev/null; #download and install
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json #allow travis ci to access google cloud something like aws IAM
+  - gcloud config set project multi-k8s-2-365013 
+  - gcloud config set compute/zone asia-southeast1-a
+  - gcloud container clusters get-credentials multi-cluster
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t phuaweijie/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true phuaweijie/docker-react npm run test
+
+deploy: 
+  provider: script #script is the default bash/sh script because travis-ci does not have kubenetes provider unlike elasticbeanstlk
+  script: bash ./deploy.sh
+  on:
+    branch: master
 
