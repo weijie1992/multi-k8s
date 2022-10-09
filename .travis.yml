@@ -10,7 +10,7 @@ before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null; #download and install
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
-  - gcloud auth activate-service-account --key-file service-account.json #allow travis ci to access google cloud something like aws IAM
+  - gcloud auth activate-service-account --key-file multi-k8s-2-365013-4cd8336f48ac.json #allow travis ci to access google cloud something like aws IAM
   - gcloud config set project multi-k8s-2-365013 
   - gcloud config set compute/zone asia-southeast1-a
   - gcloud container clusters get-credentials multi-cluster
