@@ -15,10 +15,10 @@ before_install:
   - gcloud config set compute/zone asia-southeast1-a
   - gcloud container clusters get-credentials multi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  # - docker build -t phuaweijie/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-#  - docker run -e CI=true phuaweijie/docker-react npm run test
+  - docker run -e CI=true stephengrider/react-test npm run test
 
 deploy: 
   provider: script #script is the default bash/sh script because travis-ci does not have kubenetes provider unlike elasticbeanstlk
