@@ -22,7 +22,7 @@ script:
 
 deploy: 
   provider: script #script is the default bash/sh script because travis-ci does not have kubenetes provider unlike elasticbeanstlk
-  script: bash ./deploy2.sh
+  script: bash ./deploy.sh
   on:
     branch: master
 
