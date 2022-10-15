@@ -1,6 +1,6 @@
-docker build -t phuaweijie/multi-client:latest phuaweijie/multi-client:$SHA -f ./client/Dockerfile ./client
-docker build -t phuaweijie/multi-server:latest phuaweijie/multi-server:$SHA -f ./server/Dockerfile ./server
-docker build -t phuaweijie/multi-worker:latest phuaweijie/multi-worker:$SHA -f ./worker/Dockerfile ./worker
+docker build -t phuaweijie/multi-client:latest -t phuaweijie/multi-client:$SHA -f ./client/Dockerfile ./client
+docker build -t phuaweijie/multi-server:latest -t phuaweijie/multi-server:$SHA -f ./server/Dockerfile ./server
+docker build -t phuaweijie/multi-worker:latest -t phuaweijie/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
 docker push phuaweijie/multi-client:latest
 docker push phuaweijie/multi-server:latest
